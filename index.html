@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Darragi AI Collection</title>
+  <style>
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--text-color, #fff);
+      background-color: var(--background-color, #2b1055);
+    }
+
+    button {
+      cursor: pointer;
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: none;
+      background-color: var(--button-color, #ff6f61);
+      color: #fff;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--button-hover-color, #d84315);
+    }
+
+    input, button {
+      margin: 10px 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .ai-tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+
+    .tool-card {
+      background-color: rgba(44, 44, 62, 0.9);
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .tool-title {
+      font-size: 1.5rem;
+      color: #ffca28;
+      margin-bottom: 10px;
+    }
+
+    .tool-description {
+      font-size: 1rem;
+      color: #ddd;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    .settings {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Page -->
+  <div id="login-page" class="container">
+    <h1>Login</h1>
+    <input type="email" id="login-email" placeholder="Enter Email">
+    <input type="password" id="login-password" placeholder="Enter Password">
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <button onclick="showSignUpPage()">Sign Up</button></p>
+  </div>
+
+  <!-- Signup Page -->
+  <div id="signup-page" class="container hidden">
+    <h1>Sign Up</h1>
+    <input type="text" id="signup-username" placeholder="Enter Username">
+    <input type="email" id="signup-email" placeholder="Enter Email">
+    <input type="password" id="signup-password" placeholder="Enter Password">
+    <input type="password" id="signup-confirm-password" placeholder="Confirm Password">
+    <button onclick="signUp()">Sign Up</button>
+    <p>Already have an account? <button onclick="showLoginPage()">Login</button></p>
+  </div>
+
+  <!-- AI Tools Page -->
+  <div id="ai-tools-page" class="container hidden">
+    <h1>Darragi AI Collection</h1>
+    <p id="points-display">Points: 1000</p>
+    <div class="ai-tools">
+      <!-- Existing AI Tools -->
+      <div class="tool-card">
+        <h3 class="tool-title">ChatGPT</h3>
+        <p class="tool-description">An AI chatbot for generating text-based responses.</p>
+        <button onclick="visitTool('https://chat.openai.com')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Eleven Labs</h3>
+        <p class="tool-description">AI-powered voice synthesis and generation tool.</p>
+        <button onclick="visitTool('https://elevenlabs.io')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">InVideo</h3>
+        <p class="tool-description">Create stunning videos with the help of AI.</p>
+        <button onclick="visitTool('https://invideo.io')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Runway</h3>
+        <p class="tool-description">AI tools for video editing and creative projects.</p>
+        <button onclick="visitTool('https://runwayml.com')">Visit Site</button>
+      </div>
+      <!-- New AI Tools -->
+      <div class="tool-card">
+        <h3 class="tool-title">MidJourney</h3>
+        <p class="tool-description">AI for generative art creation.</p>
+        <button onclick="visitTool('https://www.midjourney.com')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Pictory</h3>
+        <p class="tool-description">AI video creation from text.</p>
+        <button onclick="visitTool('https://pictory.ai')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Descript</h3>
+        <p class="tool-description">Audio and video editing tool with AI.</p>
+        <button onclick="visitTool('https://www.descript.com')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Notion AI</h3>
+        <p class="tool-description">AI to supercharge your productivity in Notion.</p>
+        <button onclick="visitTool('https://www.notion.so')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">OpenAI Codex</h3>
+        <p class="tool-description">AI for coding assistance.</p>
+        <button onclick="visitTool('https://openai.com')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Canva AI</h3>
+        <p class="tool-description">AI tools for graphic design.</p>
+        <button onclick="visitTool('https://www.canva.com')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Writesonic</h3>
+        <p class="tool-description">AI for long-form content writing.</p>
+        <button onclick="visitTool('https://writesonic.com')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Replika</h3>
+        <p class="tool-description">AI chatbot companion.</p>
+        <button onclick="visitTool('https://replika.ai')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Play.ht</h3>
+        <p class="tool-description">AI for text-to-speech generation.</p>
+        <button onclick="visitTool('https://play.ht')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Beautiful.ai</h3>
+        <p class="tool-description">AI-powered presentation creator.</p>
+        <button onclick="visitTool('https://www.beautiful.ai')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Grammarly</h3>
+        <p class="tool-description">AI writing assistant.</p>
+        <button onclick="visitTool('https://www.grammarly.com')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Looka</h3>
+        <p class="tool-description">AI for generating professional logos and branding kits.</p>
+        <button onclick="visitTool('https://looka.com')">Visit Site</button>
+      </div>
+      <!-- Additional AI Tools -->
+      <div class="tool-card">
+        <h3 class="tool-title">CopySmith</h3>
+        <p class="tool-description">Generate marketing copy and creative content with AI.</p>
+        <button onclick="visitTool('https://copysmith.ai')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">DeepArt</h3>
+        <p class="tool-description">Create AI-enhanced artwork.</p>
+        <button onclick="visitTool('https://deepart.io')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Simplified</h3>
+        <p class="tool-description">AI tools for design, video, and content creation.</p>
+        <button onclick="visitTool('https://simplified.com')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Speechify</h3>
+        <p class="tool-description">AI-powered text-to-speech tool for reading content aloud.</p>
+        <button onclick="visitTool('https://speechify.com')">Visit Site</button>
+      </div>
+      <div class="tool-card">
+        <h3 class="tool-title">Designify</h3>
+        <p class="tool-description">Instantly enhance and edit images with AI.</p>
+        <button onclick="visitTool('https://designify.com')">Visit Site</button>
+      </div>
+    </div>
+    <button onclick="showSettingsPage()">Settings</button>
+  </div>
+
+  <!-- Settings Page -->
+  <div id="settings-page" class="container hidden">
+    <h1>Settings</h1>
+    <div class="settings">
+      <label for="background-color">Background Color:</label>
+      <input type="color" id="background-color" onchange="updateBackgroundColor()">
+    </div>
+    <div class="settings">
+      <label for="button-color">Button Color:</label>
+      <input type="color" id="button-color" onchange="updateButtonColor()">
+    </div>
+    <div class="settings">
+      <label for="text-color">Text Color:</label>
+      <input type="color" id="text-color" onchange="updateTextColor()">
+    </div>
+    <button onclick="showAIToolsPage()">Back to AI Tools</button>
+  </div>
+
+  <script>
+    let users = {};
+    let points = 1000;
+    let lastRefill = Date.now();
+
+    function login() {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      if (users[email] && users[email] === password) {
+        alert('Login successful!');
+        showAIToolsPage();
+      } else {
+        alert('Invalid email or password.');
+      }
+    }
+
+    function signUp() {
+      const username = document.getElementById('signup-username').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+      }
+
+      if (email && password) {
+        users[email] = password;
+        alert('Sign-up successful!');
+        showLoginPage();
+      } else {
+        alert('Please fill in all fields.');
+      }
+    }
+
+    function showLoginPage() {
+      hideAllPages();
+      document.getElementById('login-page').classList.remove('hidden');
+    }
+
+    function showSignUpPage() {
+      hideAllPages();
+      document.getElementById('signup-page').classList.remove('hidden');
+    }
+
+    function showAIToolsPage() {
+      hideAllPages();
+      document.getElementById('ai-tools-page').classList.remove('hidden');
+      updatePointsDisplay();
+    }
+
+    function showSettingsPage() {
+      hideAllPages();
+      document.getElementById('settings-page').classList.remove('hidden');
+    }
+
+    function hideAllPages() {
+      document.querySelectorAll('.container').forEach(page => page.classList.add('hidden'));
+    }
+
+    function updatePointsDisplay() {
+      const now = Date.now();
+      const daysSinceLastRefill = Math.floor((now - lastRefill) / (1000 * 60 * 60 * 24));
+      if (daysSinceLastRefill >= 7) {
+        points = 1000;
+        lastRefill = now;
+      }
+      document.getElementById('points-display').textContent = `Points: ${points}`;
+    }
+
+    function visitTool(url) {
+      if (points >= 10) {
+        points -= 10;
+        updatePointsDisplay();
+        window.open(url, '_blank');
+      } else {
+        alert('Not enough points. Wait for a refill.');
+      }
+    }
+
+    function updateBackgroundColor() {
+      const color = document.getElementById('background-color').value;
+      document.documentElement.style.setProperty('--background-color', color);
+    }
+
+    function updateButtonColor() {
+      const color = document.getElementById('button-color').value;
+      document.documentElement.style.setProperty('--button-color', color);
+      document.documentElement.style.setProperty('--button-hover-color', color);
+    }
+
+    function updateTextColor() {
+      const color = document.getElementById('text-color').value;
+      document.documentElement.style.setProperty('--text-color', color);
+    }
+  </script>
+</body>
+</html>
